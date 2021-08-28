@@ -2,6 +2,7 @@ package com.taufiq.api.model
 
 import kotlinx.serialization.Serializable
 
+
 val customerStorage = mutableListOf<Customer>()
 
 @Serializable

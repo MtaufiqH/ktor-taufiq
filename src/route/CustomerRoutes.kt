@@ -1,8 +1,10 @@
 package com.taufiq.api.route
 
+import com.taufiq.api.model.Customer
 import com.taufiq.api.model.customerStorage
 import io.ktor.application.*
 import io.ktor.http.*
+import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
@@ -34,13 +36,29 @@ fun Route.customerRouting() {
 
         post {
             // input customer
-            val customer = call
+            val customer = call.receive<Customer>()
+            customerStorage.add(customer)
+            call.respondText("Customer stored correctly", status= HttpStatusCode.Created)
         }
 
         delete("{id}") {
             // delete customer by id
+            val id = call.parameters.get("id") ?: return@delete call.respond(HttpStatusCode.BadRequest)
+            if (customerStorage.removeIf{ customer ->
+                    customer.id == id
+                }){
+                call.respondText("Customer removed correctly", status = HttpStatusCode.Accepted)
+            } else {
+                call.respondText("Not Found", status = HttpStatusCode.NotFound)
+            }
         }
 
     }
 
+}
+
+fun Application.registerCustomerRoutes() {
+    routing {
+        customerRouting()
+    }
 }
