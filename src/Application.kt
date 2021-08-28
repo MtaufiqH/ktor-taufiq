@@ -9,6 +9,8 @@ import io.ktor.gson.*
 import io.ktor.features.*
 import io.ktor.client.*
 import io.ktor.client.engine.jetty.*
+import io.ktor.http.HttpHeaders.Accept
+import io.netty.handler.codec.http.HttpMethod.GET
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -17,6 +19,8 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 fun Application.module(testing: Boolean = false) {
     install(ContentNegotiation) {
         gson {
+
+
         }
     }
 

@@ -24,6 +24,7 @@ sourceSets {
 
 repositories {
     mavenLocal()
+    mavenCentral()
     jcenter()
     maven { url 'https://kotlin.bintray.com/ktor' }
 }
@@ -38,4 +39,5 @@ dependencies {
     implementation "io.ktor:ktor-client-core-jvm:$ktor_version"
     implementation "io.ktor:ktor-client-jetty:$ktor_version"
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
 }
