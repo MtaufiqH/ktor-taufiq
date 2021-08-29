@@ -43,7 +43,7 @@ fun Route.customerRouting() {
 
         delete("{id}") {
             // delete customer by id
-            val id = call.parameters.get("id") ?: return@delete call.respond(HttpStatusCode.BadRequest)
+            val id = call.parameters["id"] ?: return@delete call.respond(HttpStatusCode.BadRequest)
             if (customerStorage.removeIf{ customer ->
                     customer.id == id
                 }){
